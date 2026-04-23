@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0f0f17;
+  --surface: #16161f;
+  --surface-2: #1c1c28;
+  --surface-3: #21212f;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-hover: rgba(255, 255, 255, 0.14);
+
+  --accent-purple: #7c5cfc;
+  --accent-purple-light: #9b7dfd;
+  --accent-blue: #3b9eff;
+  --accent-cyan: #22d3ee;
+  --accent-green: #22c55e;
+  --accent-pink: #f472b6;
+  --accent-orange: #fb923c;
+  --accent-red: #ef4444;
+  --accent-yellow: #eab308;
+
+  --text-primary: #f0f0f8;
+  --text-secondary: rgba(240, 240, 248, 0.55);
+  --text-muted: rgba(240, 240, 248, 0.3);
+
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.55);
+
+  --font: 'Plus Jakarta Sans', 'Inter', sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font);
+  background: #08080f;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+button {
+  font-family: var(--font);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+input,
+textarea {
+  font-family: var(--font);
+  border: none;
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Utility */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(124, 92, 252, 0.5);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(124, 92, 252, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(124, 92, 252, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* ── GlowButton ─────────────────────────────────────── */
+.glow-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 40px -10px rgba(14, 165, 233, 0.65);
+}
+
+.glow-btn:hover .glow-btn__glow {
+  opacity: 1;
+}
+
+.glow-btn:hover .glow-btn__border {
+  opacity: 0;
+}
+
+.glow-btn:hover .glow-btn__inner {
+  background: rgba(0, 0, 0, 0.90);
+}
+
+.glow-btn:active {
+  transform: scale(0.98);
+}
+
+/* ── BeamButton ─────────────────────────────────────── */
+@keyframes beam-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dots-move {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 24px 24px;
+  }
+}
+
+.beam-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 9999px;
+  padding: 14px 36px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  transition: transform 0.5s ease, box-shadow 0.5s ease, color 0.3s;
+}
+
+.beam-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 36px -8px rgba(255, 255, 255, 0.45);
+  color: #fff;
+}
+
+.beam-btn:active {
+  transform: scale(0.97);
+}
+
+/* Rotating conic border */
+.beam-btn__border {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  border-radius: inherit;
+  overflow: hidden;
+  padding: 1px;
+}
+
+.beam-btn__border-spin {
+  position: absolute;
+  inset: -100%;
+  /* Purple → blue → white beam matching app accent palette */
+  background: conic-gradient(from 0deg, transparent 0deg 290deg, #7c5cfc 320deg, #ffffff 355deg, transparent 360deg);
+  animation: beam-spin 3s linear infinite;
+  animation-play-state: paused;
+}
+.beam-btn:hover .beam-btn__border-spin {
+  animation-play-state: running;
+}
+
+.beam-btn__border-fill {
+  position: absolute;
+  inset: 1px;
+  border-radius: 9999px;
+  background: #0a0a12;
+}
+
+/* Dark inner layer */
+.beam-btn__inner {
+  position: absolute;
+  inset: 2px;
+  z-index: -1;
+  border-radius: 9999px;
+  overflow: hidden;
+  /* Match the app's glass dark surface */
+  background: rgba(10, 10, 20, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.beam-btn__inner-grad {
+  position: absolute;
+  inset: 0;
+  /* Subtle purple tint from top matching app purple accent */
+  background: linear-gradient(to bottom, rgba(124, 92, 252, 0.08) 0%, transparent 100%);
+}
+
+.beam-btn__inner-dots {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 1px);
+  background-size: 12px 12px;
+  animation: dots-move 8s linear infinite;
+  animation-play-state: paused;
+}
+.beam-btn:hover .beam-btn__inner-dots {
+  animation-play-state: running;
+}
+
+.beam-btn__inner-glow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 66%;
+  height: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  filter: blur(20px);
+  border-radius: 9999px;
+  pointer-events: none;
+  transition: background 0.5s ease;
+}
+
+.beam-btn:hover .beam-btn__inner-glow {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Arrow icon */
+.beam-btn__arrow {
+  position: relative;
+  z-index: 10;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.beam-btn:hover .beam-btn__arrow {
+  transform: translateX(4px);
+}
